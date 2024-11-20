@@ -24,4 +24,25 @@ export interface Project {
     description: string;
   }
   
+  export interface ProjectMetadataProps {
+    data: {
+      title: string;
+      description: string;
+      year: number;
+      category: string;
+      tags: string[];
+      files: File[]; 
+      thumbnail?: File;
+    };
+    onUpdate: (data: Partial<{
+      title: string;
+      description: string;
+      year: number;
+      category: string;
+      tags: string[];
+      files: File[]; 
+      thumbnail?: File;
+    }>) => void;
+  }
+  
   
