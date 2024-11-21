@@ -60,10 +60,12 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-4">
-          <Button variant="outline">
+         <a href="/upload">
+         <Button variant="outline">
             <Upload className="w-4 h-4 mr-2" />
             Upload Project
           </Button>
+         </a>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="relative h-8 w-8 rounded-full">

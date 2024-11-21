@@ -59,7 +59,6 @@ const ProjectPortal = () => {
     <div className="min-h-screen bg-gray-50">
       <Header />
       <main className="max-w-7xl mx-auto px-4 py-8">
-        {/* Hero Section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">Discover Student Projects</h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
@@ -114,14 +113,14 @@ const ProjectPortal = () => {
                   title: "AI-Powered Study Assistant",
                   description: "An intelligent study companion using NLP to help students learn more effectively.",
                   author: "Sarah Johnson",
-                  authorAvatar: "/placeholder-avatar.jpg",
+                  authorAvatar: "/icon.JPG",
                   year: 2024,
                   tags: ["AI", "ML", "Education"],
                   downloadUrl: "/projects/1",
                   category: "AI/ML",
                   downloads: 1234,
                   likes: 456,
-                  thumbnail: "/api/placeholder/600/400"
+                  thumbnail: "/icon.JPG"
                 }}
               />
               <FeaturedProjectCard
@@ -130,14 +129,14 @@ const ProjectPortal = () => {
                   title: "Sustainable Smart Campus",
                   description: "IoT-based solution for monitoring and optimizing campus energy usage.",
                   author: "Michael Chen",
-                  authorAvatar: "/placeholder-avatar.jpg",
+                  authorAvatar: "/icon.JPG",
                   year: 2024,
                   tags: ["IoT", "Sustainability"],
                   downloadUrl: "/projects/2",
                   category: "IoT",
                   downloads: 892,
                   likes: 345,
-                  thumbnail: "/api/placeholder/600/400"
+                  thumbnail: "/icon.JPG"
                 }}
               />
             </div>

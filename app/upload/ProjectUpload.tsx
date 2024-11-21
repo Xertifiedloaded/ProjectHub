@@ -67,7 +67,7 @@ export function ProjectUploadForm() {
         formData.files.map(async (file) => {
           const fileData = new FormData();
           fileData.append('file', file);
-          const res = await fetch('/api/upload', {
+          const res = await fetch('/api/projects', {
             method: 'POST',
             body: fileData,
           });
@@ -75,7 +75,6 @@ export function ProjectUploadForm() {
         })
       );
 
-      // Upload thumbnail if exists
       let thumbnailUrl;
       if (formData.thumbnail) {
         const thumbnailData = new FormData();
@@ -143,7 +142,7 @@ export function ProjectUploadForm() {
         <h1 className="text-3xl font-bold">Upload Project</h1>
         <Button
           variant="ghost"
-          onClick={() => router.push('/dashboard')}
+          onClick={() => router.push('/')}
         >
           Cancel
         </Button>
