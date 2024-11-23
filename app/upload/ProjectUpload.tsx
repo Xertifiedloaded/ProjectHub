@@ -1,4 +1,3 @@
-// components/project-upload-form-v2.tsx
 'use client';
 
 import { useState } from 'react';
@@ -13,7 +12,6 @@ import {
   TabsList, 
   TabsTrigger 
 } from '@/components/ui/tabs';
-
 
 import { useToast } from '@/hooks/use-toast';
 import { ProjectDetails } from './ProjectDetails';
@@ -60,14 +58,12 @@ export function ProjectUploadForm() {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
-
     try {
-      // Handle file uploads first
       const uploadedFiles = await Promise.all(
         formData.files.map(async (file) => {
           const fileData = new FormData();
           fileData.append('file', file);
-          const res = await fetch('/api/projects', {
+          const res = await fetch('/upload/file', {
             method: 'POST',
             body: fileData,
           });
@@ -79,7 +75,7 @@ export function ProjectUploadForm() {
       if (formData.thumbnail) {
         const thumbnailData = new FormData();
         thumbnailData.append('file', formData.thumbnail);
-        const res = await fetch('/api/upload/thumbnail', {
+        const res = await fetch('/upload/thumbnail', {
           method: 'POST',
           body: thumbnailData,
         });
@@ -121,6 +117,8 @@ export function ProjectUploadForm() {
       setIsSubmitting(false);
     }
   };
+
+
 
   const handleNext = () => {
     const currentIndex = steps.findIndex(step => step.id === currentStep);

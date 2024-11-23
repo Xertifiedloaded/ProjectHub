@@ -16,67 +16,42 @@ model User {
     role       String?   @default("student")
     department String?
     projects   Project[]
-    comments   Comment[]
-    likes      Like[]
     createdAt  DateTime  @default(now())
     updatedAt  DateTime  @updatedAt
 }
 
 model Project {
-    id          String        @id @default(auto()) @map("_id") @db.ObjectId
-    title       String
-    description String
-    author      User          @relation(fields: [authorId], references: [id])
-    authorId    String        @db.ObjectId
-    year        Int
-    tags        String[]
-    category    String
-    files       ProjectFile[]
-    thumbnail   String?
-    downloads   Int           @default(0)
-    likes       Like[]
-    comments    Comment[]
-    status      ProjectStatus @default(draft)
-    createdAt   DateTime      @default(now())
-    updatedAt   DateTime      @updatedAt
-    
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  year        Int
+  category    String   
+  status      String   @default("draft")
+  thumbnailUrl String?
+  tags        String[]
+  files       File[]
+  
+  userId      String   @db.ObjectId
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
 }
 
-model ProjectFile {
-    id        String   @id @default(auto()) @map("_id") @db.ObjectId
-    name      String
-    url       String
-    public_id String
-    size      Int
-    type      String
-    project   Project  @relation(fields: [projectId], references: [id])
-    projectId String   @db.ObjectId
-    createdAt DateTime @default(now())
+model File {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  url       String
+  size      Int  
+  type      String  
+  projectId String   @db.ObjectId
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([projectId])
 }
 
-model Comment {
-    id        String   @id @default(auto()) @map("_id") @db.ObjectId
-    content   String
-    user      User     @relation(fields: [userId], references: [id])
-    userId    String   @db.ObjectId
-    project   Project  @relation(fields: [projectId], references: [id])
-    projectId String   @db.ObjectId
-    createdAt DateTime @default(now())
-}
-
-model Like {
-    id        String   @id @default(auto()) @map("_id") @db.ObjectId
-    user      User     @relation(fields: [userId], references: [id])
-    userId    String   @db.ObjectId
-    project   Project  @relation(fields: [projectId], references: [id])
-    projectId String   @db.ObjectId
-    createdAt DateTime @default(now())
-
-    @@unique([projectId, userId])
-}
-
-enum ProjectStatus {
-    draft
-    published
-    archived
-}
